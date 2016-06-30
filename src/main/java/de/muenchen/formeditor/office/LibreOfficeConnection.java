@@ -89,13 +89,13 @@ public class LibreOfficeConnection implements IOfficeConnection
    * für diese Datei. 
    */
   @Override
-  public TextDocumentModel load(File file)
+  public TextDocumentModel load(File file, boolean asTemplate)
   {
     try
     {
       String url = UNO.getParsedUNOUrl(file.toURI().toURL()
 	  .toExternalForm()).Complete;
-      XTextDocument doc = UNO.XTextDocument(UNO.loadComponentFromURL(url, false, false));
+      XTextDocument doc = UNO.XTextDocument(UNO.loadComponentFromURL(url, asTemplate, false));
       TransitionModeDataContainer persistentDataContainer = new TransitionModeDataContainer(doc);
       return new TextDocumentModel(doc, persistentDataContainer);
     } catch (IllegalArgumentException | IOException

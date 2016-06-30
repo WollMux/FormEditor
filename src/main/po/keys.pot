@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: formularmax 0.0.1-SNAPSHOT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-22 14:29+0200\n"
+"POT-Creation-Date: 2016-06-30 12:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,10 +44,10 @@ msgstr ""
 msgid "Fehler bei der Verbindung mit Office."
 msgstr ""
 
-#: de/muenchen/formeditor/office/LibreOfficeConnection.load(Ljava/io/File;)Lde/muenchen/allg/itd51/wollmux/core/document/TextDocumentModel;
+#: de/muenchen/formeditor/office/LibreOfficeConnection.load(Ljava/io/File;Z)Lde/muenchen/allg/itd51/wollmux/core/document/TextDocumentModel;
 msgid "Fehler beim Laden des Formulars."
 msgstr ""
 
-#: de/muenchen/formeditor/form/OTTForm.close()V
+#: de/muenchen/formeditor/form/ODFForm.close()V
 msgid "Die Datei kann zur Zeit nicht geschlossen werden."
 msgstr ""

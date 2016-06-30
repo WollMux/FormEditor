@@ -15,5 +15,5 @@ public interface IOfficeConnection
   public void init();
   public boolean isConnected();
   public void connect();
-  public TextDocumentModel load(File file);
+  public TextDocumentModel load(File file, boolean asTemplate);
 }

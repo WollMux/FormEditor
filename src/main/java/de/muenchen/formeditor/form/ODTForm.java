@@ -7,7 +7,7 @@ import de.muenchen.formeditor.beans.Form;
  *
  */
 @Form("application/vnd.oasis.opendocument.text")
-public class ODTForm extends OTTForm
+public class ODTForm extends ODFForm
 {
 
 }

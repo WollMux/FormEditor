@@ -5,7 +5,9 @@ import java.io.File;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.inject.Inject;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.main.Main;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.FileBasedConfiguration;
@@ -19,11 +21,14 @@ import org.apache.commons.configuration2.io.FileHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.muenchen.formeditor.FMRouteBuilder;
+import de.muenchen.formeditor.camel.FMRouteBuilder;
 
 @ApplicationScoped
 public class Producers
 {
+  @Inject
+  private Logger log;
+
   @Produces
   public Logger produceLogger(InjectionPoint injectionPoint)
   {
@@ -36,8 +41,9 @@ public class Producers
   public Configuration getConfig() throws ConfigurationException
   {
     File propertiesFile = new File("config.properties");
-    FileBasedBuilderParameters params = new Parameters().fileBased().setFile(
-	propertiesFile).setLocationStrategy(new ClasspathLocationStrategy());
+    FileBasedBuilderParameters params = new Parameters().fileBased()
+	.setFile(propertiesFile)
+	.setLocationStrategy(new ClasspathLocationStrategy());
 
     FileBasedConfigurationBuilder<FileBasedConfiguration> builder = new FileBasedConfigurationBuilder<FileBasedConfiguration>(
 	PropertiesConfiguration.class).configure(params);
@@ -45,37 +51,50 @@ public class Producers
 
     return config;
   }
-  
+
   @Produces
   public FileHandler getFileHandler(Configuration config)
   {
     if (config instanceof FileBasedConfiguration)
-      return new FileHandler((FileBasedConfiguration)config);
+      return new FileHandler((FileBasedConfiguration) config);
     return null;
   }
-  
+
   @Produces
   @Config
-  public String getStringConfigValue(InjectionPoint ip, Configuration config) 
+  public String getStringConfigValue(InjectionPoint ip, Configuration config)
   {
     String key = ip.getAnnotated().getAnnotation(Config.class).value();
-    
+
     if (!key.isEmpty())
     {
       return config.getString(key);
     }
-    
+
     return null;
   }
 
   @Produces
   @ApplicationScoped
-  public Main getCamel(FMRouteBuilder routeBuilder)
+  public Main getCamel(FMRouteBuilder routeBuilder) throws Exception
   {
-    Main main = new Main();
+    try
+    {
+      Main main = new Main();
 
-    main.addRouteBuilder(routeBuilder);
-
-    return main;
+      main.addRouteBuilder(routeBuilder);
+      main.start();
+      return main;
+    } catch (Exception e)
+    {
+      log.error(e.getMessage(), e);
+      throw e;
+    }
+  }
+  
+  @Produces
+  public CamelContext getCamelContext(Main main)
+  {
+    return main.getCamelContexts().stream().findFirst().get();
   }
 }

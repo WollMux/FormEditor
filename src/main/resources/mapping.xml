@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Object Mapping DTD Version 1.0//EN" "http://Castor.exolab.org/mapping.dtd">
+
+<mapping>
+	<class name="de.muenchen.formeditor.form.data.Config">
+		<map-to xml="config" />
+		
+		<field name="file" type="de.muenchen.formeditor.form.data.File" required="true">
+			<bind-xml name="file" />
+		</field> 
+	</class>
+	<class name="de.muenchen.formeditor.form.data.File">
+		<map-to xml="file" />
+		
+		<field name="children" collection="collection" type="de.muenchen.formeditor.form.data.Element">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+	</class>
+	<class name="de.muenchen.formeditor.form.data.Group">
+		<map-to xml="group" />
+		
+		<field name="children" collection="collection" type="de.muenchen.formeditor.form.data.Element">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+	</class>
+	<class name="de.muenchen.formeditor.form.data.Key">
+		<map-to xml="key" />
+		
+		<field name="id" type="string">
+			<bind-xml name="id" node="attribute" />
+		</field>
+		<field name="content" type="de.muenchen.formeditor.form.data.Element">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+	</class>
+	<class name="de.muenchen.formeditor.form.data.Value">
+		<map-to xml="value" />
+		
+		<field name="text" type="string">
+			<bind-xml name="text" node="text" />
+		</field>
+	</class>
+</mapping>
