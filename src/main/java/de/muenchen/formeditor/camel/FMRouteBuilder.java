@@ -12,21 +12,25 @@ public class FMRouteBuilder extends RouteBuilder
 {
   @Inject
   private ConfigXmlProcessor configXmlProcessor;
-  
+
+  @Inject
+  private FormDataProcessor formDataProcessor;
+
   @Inject
   public FMRouteBuilder(Logger log)
   {
     super();
     this.log = log;
   }
-  
+
   @Override
   public void configure() throws Exception
   {
     CastorDataFormat castor = new CastorDataFormat();
     castor.setMappingFile("mapping.xml");
-    
-    from("direct:read-config").process(configXmlProcessor).unmarshal(castor);
+
+    from("direct:read-config").process(configXmlProcessor).unmarshal(castor)
+	.process(formDataProcessor);
     from("direct:write-config").marshal(castor);
   }
 }

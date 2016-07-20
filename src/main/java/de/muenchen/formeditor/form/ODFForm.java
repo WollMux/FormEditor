@@ -107,8 +107,8 @@ public abstract class ODFForm extends BaseForm
     try
     {
       ConfGenerator gen = new ConfGenerator(doc);
-      gen.generateConf();
-      persistentDataContainer.setData(DataID.FORMULARBESCHREIBUNG, "");
+      String conf = gen.generateConf("UTF-8");
+      persistentDataContainer.setData(DataID.FORMULARBESCHREIBUNG, conf);
     } catch (XMLGeneratorException e)
     {
       throw new FormException(e);

@@ -5,9 +5,10 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.71">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"  HBox.hgrow="ALWAYS" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.71">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
@@ -16,10 +17,7 @@
       </ToolBar>
    </top>
    <center>
-      <TabPane prefHeight="311.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Tab" />
-        </tabs>
+      <TabPane fx:id="tabPane" prefHeight="311.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
       </TabPane>
    </center>
 </BorderPane>

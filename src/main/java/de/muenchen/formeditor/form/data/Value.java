@@ -13,4 +13,15 @@ public class Value implements Element
   {
     this.text = text;
   }
+
+  @Override
+  public void setValue(String name, String value)
+  {
+  }
+
+  @Override
+  public String getValue(String name)
+  {
+    return null;
+  }
 }
